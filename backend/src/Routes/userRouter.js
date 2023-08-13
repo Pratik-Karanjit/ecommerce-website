@@ -8,6 +8,7 @@ import {
   logout,
   myProfile,
   readAllUser,
+  updateProductQuantity,
   verifyEmail,
   // readUserDetails,
 } from "../Controller/userController.js";
@@ -32,6 +33,8 @@ userRouter.route('/products').get(getAllProducts);
 userRouter.route('/products/:productId').get(getProductById);
 
 userRouter.route('/products/create').post(createProduct);
+
+userRouter.route('/update-product-quantities').post(updateProductQuantity);
 
 // userRouter.route("/delete").delete(isAuthenticatedForEmail, isAuthorized(["superAdmin"]), deleteUser);
 

@@ -15,7 +15,6 @@ connectDb();
 
 app.use(express.static("./public"));
 
-// app.use(errorMiddleware);
 
 app.listen(port, () => {
   console.log(`app is listening at port ${port}`);

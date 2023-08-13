@@ -177,10 +177,10 @@ export let updateUser = expressAsyncHandler(async (req, res, next) => {
 
 export let createProduct = expressAsyncHandler(async (req, res, next) => {
   // console.log("createProduct entered.******")
-  const { title, price, description } = req.body;
+  const { title, price, description, quantity } = req.body;
 
   try {
-    const newProduct = await Product.create({ title, price, description });
+    const newProduct = await Product.create({ title, price, description,quantity });
     successResponse(res, HttpStatus.CREATED, 'Product created successfully', newProduct);
   } catch (error) {
     errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Error creating product');
@@ -210,3 +210,19 @@ export const getProductById = expressAsyncHandler(async (req, res) => {
     errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Error fetching product details');
   }
 });
+
+  export const updateProductQuantity = expressAsyncHandler(async (req, res) => {
+    const updatedProducts = req.body;
+    console.log(updatedProducts)
+
+    try {
+      for (const updatedProduct of updatedProducts) {
+        const { _id, quantity } = updatedProduct;
+        await Product.findByIdAndUpdate(_id, { $inc: { quantity: -quantity } });
+      }
+      successResponse(res, HttpStatus.OK, 'Product quantities updated successfully', { success: true });
+    } catch (error) {
+      console.error('Error updating product quantities:', error);
+      errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'An error occurred while updating product quantities.');
+    }
+  })
