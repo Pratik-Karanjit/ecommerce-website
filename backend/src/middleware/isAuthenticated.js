@@ -3,7 +3,7 @@ import { Token } from "../Schema/model.js";
 import { verifyToken } from "../utils/token.js";
 
 let isAuthenticated = expressAsyncHandler(async (req, res, next) => {
-  // console.log("first")
+  console.log("first")
   let bearerToken = req.headers.authorization;
   let tokenArr = bearerToken.split(" ");
 

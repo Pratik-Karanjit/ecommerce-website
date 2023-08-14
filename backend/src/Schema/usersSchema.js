@@ -47,7 +47,7 @@ export let usersSchema = Schema({
   role: {
     type: String,
     enum: {
-      values: ["admin", "customer","superAdmin"],
+      values: ["admin", "customer"],
       default: "customer",
       message: (notEnum) => {
         return `${notEnum.value} is not valid enum`;

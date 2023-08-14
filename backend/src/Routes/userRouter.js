@@ -2,11 +2,11 @@ import { Router } from "express";
 import {
   createProduct,
   createUser,
+  deleteProduct,
   getAllProducts,
   getProductById,
   loginUser,
   logout,
-  myProfile,
   readAllUser,
   updateProductQuantity,
   verifyEmail,
@@ -24,7 +24,7 @@ userRouter.route("/verify-email").post(isAuthenticatedForEmail,verifyEmail);
 
 userRouter.route("/login").post(loginUser);
 
-userRouter.route("/my-profile").get(isAuthenticated,myProfile);
+// userRouter.route("/my-profile").get(isAuthenticated,myProducts);
 
 userRouter.route("/logout").delete(isAuthenticatedForEmail, logout);
 
@@ -32,9 +32,16 @@ userRouter.route('/products').get(getAllProducts);
 
 userRouter.route('/products/:productId').get(getProductById);
 
-userRouter.route('/products/create').post(createProduct);
-
 userRouter.route('/update-product-quantities').post(updateProductQuantity);
+
+userRouter.get('/products/:id', getProductById);
+
+userRouter.post('/products/create', createProduct);
+
+userRouter.delete('/delete-products/:id', deleteProduct);
+
+
+// userRouter.put('/products/:id', updateProduct);
 
 // userRouter.route("/delete").delete(isAuthenticatedForEmail, isAuthorized(["superAdmin"]), deleteUser);
 

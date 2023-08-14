@@ -117,11 +117,14 @@ export let loginUser = expressAsyncHandler(async (req, res, next) => {
 });
 
 //using isAuthenticated function
-export let myProfile = expressAsyncHandler(async (req, res, next) => {
-  let id = req.info.id;
-  let result = await User.findById(id);
-  successResponse(res, HttpStatus.OK, "My-profile read successfully", result);
-});
+// export let myProducts = expressAsyncHandler(async (req, res, next) => {
+//   console.log("enterashdaspdajsdpajd###########")
+//   let id = req.info.id;
+// console.log(id)
+//   let result = await User.findById(id);
+//   console.log(result)
+//   successResponse(res, HttpStatus.OK, "My products read successfully", result);
+// });
 
 
 export let logout = expressAsyncHandler(async (req, res, next) => {
@@ -176,7 +179,6 @@ export let updateUser = expressAsyncHandler(async (req, res, next) => {
 });
 
 export let createProduct = expressAsyncHandler(async (req, res, next) => {
-  // console.log("createProduct entered.******")
   const { title, price, description, quantity } = req.body;
 
   try {
@@ -191,6 +193,7 @@ export let createProduct = expressAsyncHandler(async (req, res, next) => {
 export const getAllProducts = expressAsyncHandler(async (req, res) => {
   try {
     const products = await Product.find();
+    console.log(products)
     successResponse(res, HttpStatus.OK, 'Products fetched successfully', products);
   } catch (error) {
     errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Error fetching products');
@@ -211,6 +214,24 @@ export const getProductById = expressAsyncHandler(async (req, res) => {
   }
 });
 
+
+export const deleteProduct = expressAsyncHandler(async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const deletedProduct = await Product.findByIdAndRemove(productId);
+
+    if (deletedProduct) {
+      successResponse(res, HttpStatus.OK, 'Product deleted successfully', deletedProduct);
+    } else {
+      errorResponse(res, HttpStatus.NOT_FOUND, 'Product not found');
+    }
+  } catch (error) {
+    errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Error deleting product');
+  }
+});
+
+
   export const updateProductQuantity = expressAsyncHandler(async (req, res) => {
     const updatedProducts = req.body;
     console.log(updatedProducts)
@@ -226,3 +247,17 @@ export const getProductById = expressAsyncHandler(async (req, res) => {
       errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'An error occurred while updating product quantities.');
     }
   })
+
+
+  // export let deleteProduct = expressAsyncHandler(async (req, res, next) => {
+  //   try {
+  //     console.log("deleteProduct chiryo")
+  //     console.log(req.info.id);
+  //     let result = await Product.findByIdAndDelete(req.info.id);
+  //     console.log(result);
+  //     successResponse(res, HttpStatus.OK, "Delete product successfully.", result);
+  //   } catch (error) {
+  //     error.statusCode = HttpStatus.BAD_REQUEST;
+  //     next(error);
+  //   }
+  // });
