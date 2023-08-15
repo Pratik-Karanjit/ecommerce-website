@@ -1,0 +1,136 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.product-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .product-item,
+  .product-item-cart {
+    border: 1px solid #ddd;
+    padding: 24px;
+    max-width: 300px;
+    flex: 1;
+    border-radius: 5px;
+    min-width: 300px;
+    background: white;
+  }
+  
+  .product-item-cart {
+    padding: 24px 48px;
+  }
+  
+  .product-title {
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+  
+  .product-info {
+    margin-bottom: 5px;
+  }
+  
+  .product-description {
+    margin-bottom: 10px;
+  }
+  
+  .btn-view,
+  .btn-add,
+  .btn-remove {
+    background-color: #557A95;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+  }
+
+  .btn-view:hover,
+  .btn-add:hover,
+  .btn-remove:hover {
+    background-color: #2d4a5f;
+    transition: 0.3s ease-in;
+  }
+  
+  .cart-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .cart-items {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+  }
+  
+  .cart-item {
+    margin: 5px 0;
+  }
+  
+  .btn-purchase {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .searchForm input{
+    height: 26px;
+    width: 400px;
+  }
+  .searchForm button{
+    height: 32px;
+  }
+
+
+  .product-details {
+    border: 1px solid #ddd;
+    padding: 20px;
+    max-width: 30px;
+    flex: 1;
+    border-radius: 5px;
+    min-width: 170px;
+    background: white;
+    max-height: 220px;
+    /* margin-top: 10%;
+    margin-left: 43%; */
+  }
+
+  .product-detail-wrap {
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn-disabled-button {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+
+  .btn-disabled-button:hover {
+    background-color: grey;
+  }

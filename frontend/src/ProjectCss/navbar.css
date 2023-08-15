@@ -1,0 +1,43 @@
+.navbar {
+    background-color: #2d4a5f;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .navbar-link {
+    margin: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-link:hover {
+    color: #ccc;
+  }
+  @media screen and (max-width: 768px) { 
+     /* This is the media query declaration. It specifies that the  */
+    /* enclosed CSS rules should only apply when the screen width is 768 pixels or less. */
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .navbar-link {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+  }
+  
+
+
+
+
+  
+  
+  
+  
+  
+  

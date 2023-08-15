@@ -1,0 +1,184 @@
+html, body{
+  height: 100%;
+  width: 100%;
+}
+.form-container {
+    max-width: 400px;
+    margin: 45px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+  }
+  
+  .form-title {
+    text-align: center;
+    margin: 0 0 20px;
+  }
+  
+  .form-input {
+    width: -webkit-fill-available;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .form-element-spacing {
+    margin-top: 15px;
+    text-align: left;
+  }
+  
+  .form-container {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .form-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .form-input,
+  .form-select {
+    padding: 12px;
+    margin-bottom: 25px;
+  }
+  
+  .form-button {
+    padding: 12px 20px;
+  }
+  
+  body {
+    background-color: #f3f6ff; 
+  }
+  .forgot-password {
+    color: blue; 
+    margin-bottom: 10px;
+  }
+
+  .profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .profile-section {
+    margin-bottom: 20px;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+  }
+  
+  .profile-info {
+    margin-top: 5px;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+  }
+  
+  .profile-button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  body {
+    background-color: #f3f6ff; 
+  }
+.uploaded-image {
+  display: block;
+  max-width: 300px;
+  max-height: 300px;
+  margin-top: 10px;
+}
+
+.registration-success-container {
+    max-width: 400px;
+    margin: 100px auto; 
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .registration-success-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .registration-success-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .form-logout {
+    display: block;
+    width: 10%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 110px;
+    
+}
+.container-logout{
+  margin-left: 40%;
+  margin-top: 15%;
+}
+
+.thank-you{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
