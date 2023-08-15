@@ -6,37 +6,34 @@ import { comparePassword, hashPassword } from "../utils/hashing.js";
 import { generateToken } from "../utils/token.js";
 import { Token, User, Product } from "../Schema/model.js";
 
-
-
-
 export let createUser = expressAsyncHandler(async (req, res, next) => {
-  let data = req.body;                                      //taking data from postman
-  data.isVerify = false                                     //we set isVerify and isDeactivate to false in code itself and not let the user decide
+  let data = req.body;                                      
+  data.isVerify = false                                 
   data.isDeactivate = false                                 
-  let email = data.email                                    //getting email and storing in variable
-  let user = await User.findOne({ email:email });           //Checking if the email is in DB
+  let email = data.email                                  
+  let user = await User.findOne({ email:email });       
   
-  if (user) {                                               //If it is then show duplicate email error
+  if (user) {                                        
     let error = new Error("Duplicate email.");              
     error.statusCode = 409;
     throw error;
-  }else{                                                    //else hash the password and create User
+  }else{                                                  
     let _hashPassword = await hashPassword(data.password);
   data.password = _hashPassword;
   let result = await User.create(req.body);
-  delete result._doc.password;                              //delete password to not show it in response
-  let infoObj = {                                           //setting infoObj and expireInfo for generating token
+  delete result._doc.password;                           
+  let infoObj = {                                        
     id: result._id,
     role: result.role,
   };
   let expireInfo = {
     expiresIn: "1d",
   };
-  let token = await generateToken(infoObj, expireInfo);    //Calling the generate token function
+  let token = await generateToken(infoObj, expireInfo);   
   await Token.create({ token });
-  let link = `${baseUrl}/verify-email?token=${token}`      //Giving link and sending it to email for email verification
+  let link = `${baseUrl}/verify-email?token=${token}`     
   await sendMail({
-    from: '"Pratik Karanjit" <uniquekc425@gmail.com>',         //This is the text that is shown in (sent by)
+    from: '"Pratik Karanjit" <uniquekc425@gmail.com>',       
     to: [data.email],
     subject: "Email verification",
     html: `<h1>
@@ -44,7 +41,6 @@ export let createUser = expressAsyncHandler(async (req, res, next) => {
     <a href = "${link}">Click to verify</a>               
     <h1>`,
   });
-
   successResponse(res, HttpStatus.CREATED, "User created successfully", result);
   }
   
@@ -52,17 +48,14 @@ export let createUser = expressAsyncHandler(async (req, res, next) => {
 
 export let verifyEmail = expressAsyncHandler(async (req, res, next) => {
   console.log("wowwwwwwwwwwwwwwwwwwwwwwwwwww")
-  let id = req.info.id;    //getting id from query and setting it in a variable
-  // console.log(id)
-  let tokenId = req.token.tokenId   //sent token inside isAuthenticated and received tokenId through it
-  // console.log(tokenId)
-  let result = await User.findByIdAndUpdate(         //This line updates the user document in the database with the provided id. 
+  let id = req.info.id;   
+  let tokenId = req.token.tokenId 
+  let result = await User.findByIdAndUpdate(     
     id,
-    { isVerify: true },    //isVerify is set to true, initially its false
-    { new: true }          //this updates the response at once and need not hit the postman twice
+    { isVerify: true },  
+    { new: true }      
   );
-  // delete result._doc.password;    //password should not be shown so we delete it
-  await Token.findByIdAndDelete(tokenId)    //No use
+  await Token.findByIdAndDelete(tokenId)    
 
   successResponse(
     res,
@@ -73,32 +66,31 @@ export let verifyEmail = expressAsyncHandler(async (req, res, next) => {
 });
 
 export let loginUser = expressAsyncHandler(async (req, res, next) => {
-  let email = req.body.email;         //getting email from postman and setting it in a variable
-  let password = req.body.password;   //getting password from postman and setting it in a variable
-  let data = await User.findOne({ email: email }); //if not present null, if present, gives output in object
-  // console.log(data)
+  let email = req.body.email;         
+  let password = req.body.password;   
+  let data = await User.findOne({ email: email });
   if(data.isDeactivate) {
-    await User.findByIdAndUpdate(data._id, {isDeactivate: false});  //isDeactivate false when logged in
+    await User.findByIdAndUpdate(data._id, {isDeactivate: false}); 
    }
 
-  if (!data) {                        //if it doesn't match the database's email throw this
+  if (!data) {                      
     let error = new Error("Credential doesn't match");
     error.statusCode = 401;
     throw error;
   } else 
   {
-    let isValidPassword = await comparePassword(password, data.password);   //checking if password matches
-    if (!isValidPassword) {                            //if it doesn't match the database's password, throw error
+    let isValidPassword = await comparePassword(password, data.password);  
+    if (!isValidPassword) {                         
       let error = new Error("Credential doesn't match");
       error.statusCode = 401;
       throw error;
     } else {
-      if (!data.isVerify) {                  //If it is not verified, throw error
+      if (!data.isVerify) {                 
 
         let error = new Error("Please Verify Your Account First.");
         error.statusCode = 401;
         throw error;
-      } else {                    //If it is verified, generate token
+      } else {                   
         let infoObj = {
           id: data._id,
           role: data.role,
@@ -106,26 +98,14 @@ export let loginUser = expressAsyncHandler(async (req, res, next) => {
         let expireInfo = {
           expiresIn: "365d",
         };
-        let token = await generateToken(infoObj, expireInfo);      //calling the generateToken function
-        await Token.create({ token });             //Theres a separate DB for Token so we are saving it there
-        res.json({ token }); // Send the token as part of the response
+        let token = await generateToken(infoObj, expireInfo);    
+        await Token.create({ token });            
+        res.json({ token });
         successResponse(res, HttpStatus.CREATED, "Login Successfully", token);
       }
     }
-    // console.log("isValidPassword", isValidPassword);
   }
 });
-
-//using isAuthenticated function
-// export let myProducts = expressAsyncHandler(async (req, res, next) => {
-//   console.log("enterashdaspdajsdpajd###########")
-//   let id = req.info.id;
-// console.log(id)
-//   let result = await User.findById(id);
-//   console.log(result)
-//   successResponse(res, HttpStatus.OK, "My products read successfully", result);
-// });
-
 
 export let logout = expressAsyncHandler(async (req, res, next) => {
   let tokenId = req.token.tokenId;
@@ -248,16 +228,3 @@ export const deleteProduct = expressAsyncHandler(async (req, res) => {
     }
   })
 
-
-  // export let deleteProduct = expressAsyncHandler(async (req, res, next) => {
-  //   try {
-  //     console.log("deleteProduct chiryo")
-  //     console.log(req.info.id);
-  //     let result = await Product.findByIdAndDelete(req.info.id);
-  //     console.log(result);
-  //     successResponse(res, HttpStatus.OK, "Delete product successfully.", result);
-  //   } catch (error) {
-  //     error.statusCode = HttpStatus.BAD_REQUEST;
-  //     next(error);
-  //   }
-  // });

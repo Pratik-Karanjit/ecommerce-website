@@ -24,8 +24,6 @@ userRouter.route("/verify-email").post(isAuthenticatedForEmail,verifyEmail);
 
 userRouter.route("/login").post(loginUser);
 
-// userRouter.route("/my-profile").get(isAuthenticated,myProducts);
-
 userRouter.route("/logout").delete(isAuthenticatedForEmail, logout);
 
 userRouter.route('/products').get(getAllProducts);
@@ -39,13 +37,5 @@ userRouter.get('/products/:id', getProductById);
 userRouter.post('/products/create', createProduct);
 
 userRouter.delete('/delete-products/:id', deleteProduct);
-
-
-// userRouter.put('/products/:id', updateProduct);
-
-// userRouter.route("/delete").delete(isAuthenticatedForEmail, isAuthorized(["superAdmin"]), deleteUser);
-
-// userRouter.route("/:id").get(readUserDetails).patch(updateUser)
-// .delete(isAuthenticated,isAuthorized,deleteUser);
 
 export default userRouter;

@@ -7,16 +7,6 @@ export let verifyToken = expressAsyncHandler(async (token) => {
   return infoObj;
 });
 
-// format of infoObj
-// {
-//     id:"...",
-//     role:"...."
-
-// }
-
-// expiresInfo:{
-//     expiresIn:"..."
-// }
 export let generateToken = expressAsyncHandler(async (infoObj, expireInfo) => {
   let token = await jwt.sign(infoObj, secretKey, expireInfo);
   return token;

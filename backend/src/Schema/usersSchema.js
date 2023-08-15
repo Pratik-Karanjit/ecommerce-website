@@ -48,7 +48,6 @@ export let usersSchema = Schema({
     type: String,
     enum: {
       values: ["admin", "customer"],
-      default: "customer",
       message: (notEnum) => {
         return `${notEnum.value} is not valid enum`;
       },
