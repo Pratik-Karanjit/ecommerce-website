@@ -47,7 +47,6 @@ export let createUser = expressAsyncHandler(async (req, res, next) => {
 });
 
 export let verifyEmail = expressAsyncHandler(async (req, res, next) => {
-  console.log("wowwwwwwwwwwwwwwwwwwwwwwwwwww")
   let id = req.info.id;   
   let tokenId = req.token.tokenId 
   let result = await User.findByIdAndUpdate(     
@@ -109,7 +108,6 @@ export let loginUser = expressAsyncHandler(async (req, res, next) => {
 
 export let logout = expressAsyncHandler(async (req, res, next) => {
   let tokenId = req.token.tokenId;
-  console.log(tokenId)
   let result = await Token.findByIdAndDelete(tokenId);
   successResponse(res, HttpStatus.OK, "logout successfully", result);
 });
@@ -132,8 +130,6 @@ export let readAllUser = expressAsyncHandler(async (req, res, next) => {
 
 export let deleteUser = expressAsyncHandler(async (req, res, next) => {
   try {
-    console.log("deleteUser chiryo")
-    console.log(req.info.id);
     let result = await User.findByIdAndDelete(req.info.id);
     // console.log(result);
     successResponse(res, HttpStatus.OK, "Delete User successfully.", result);
@@ -173,7 +169,6 @@ export let createProduct = expressAsyncHandler(async (req, res, next) => {
 export const getAllProducts = expressAsyncHandler(async (req, res) => {
   try {
     const products = await Product.find();
-    console.log(products)
     successResponse(res, HttpStatus.OK, 'Products fetched successfully', products);
   } catch (error) {
     errorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Error fetching products');

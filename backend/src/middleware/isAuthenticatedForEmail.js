@@ -10,7 +10,6 @@ let isAuthenticatedForEmail = expressAsyncHandler(async (req, res, next) => {
       error.statusCode = 401;
       throw error;
     } else {
-        // console.log("here..................")
         try {
       var info = await verifyToken(_token.token);
             
