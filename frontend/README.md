@@ -27,17 +27,12 @@ cd frontend
 npm install 
 npm start
 
-To run backend code:
-In terminal write these:
-cd ecommerce-website
-cd backend 
-npm install express
-npm start
 
+Before running backend code:
+DO these:
+Configuration
 
-3. Configuration
-
-To run MongoDB, add these info in .env file for backend
+To run MongoDB, create a .env file inside of backend folder and paste these:
 
 SECRET_KEY = mybackend
 PORT = 8000
@@ -46,6 +41,15 @@ FROM_EMAIL=your_email@gmail.com
 FROM_PASSWORD=your_app_password
 EMAIL_HOST=smtp.gmail.com
 BASE_URL = http://localhost:3000
+If you switch tabs and .env file shows black lines, click on toggle auto-cloaking.
+
+To run backend code:
+In terminal write these:
+cd ecommerce-website
+cd backend 
+npm install express
+npm start
+
 
 To set up app password, do the following:
 
@@ -62,6 +66,9 @@ To set up app password, do the following:
 4. Usage
 
 run command: npm start
+
+You will be directed to Product page. The Admin panel will be displayed regardless of what role you enter with. As the project is created locally, the data cannot be fetched with my database so I have given permission to create products via Admin panel. 
+After creating  the product, you can view it in products page and do the needfuls from admin panel. 
 
 
 
