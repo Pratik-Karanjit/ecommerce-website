@@ -12,14 +12,27 @@ Table of Contents
 1. Prerequisites
 
 Node.js
-MongoDB (running instance or connection string)
+MongoDB 
 Git (for cloning the repository)
 
 
 2. Getting Started
 
 git clone https://github.com/Pratik-Karanjit/ecommerce-website.git
-navigate to project folder
+
+To run frontend code:
+In terminal write these:
+cd ecommerce-website
+cd frontend 
+npm install 
+npm start
+
+To run backend code:
+In terminal write these:
+cd ecommerce-website
+cd backend 
+npm install express
+npm start
 
 
 3. Configuration
@@ -32,6 +45,7 @@ DB_URL=mongodb://0.0.0.0:27017/mybackend
 FROM_EMAIL=your_email@gmail.com
 FROM_PASSWORD=your_app_password
 EMAIL_HOST=smtp.gmail.com
+BASE_URL = http://localhost:3000
 
 To set up app password, do the following:
 
@@ -41,8 +55,9 @@ To set up app password, do the following:
    - Select "App" and "Other (custom name)".
    - Enter a name for your app (e.g., "My Ecommerce App").
    - Google will generate an App Password. Use this password in your `.env` file.
+   - Restart vs code as the password often runs only after restarting.
 
-# It is important to create app password for acquiring mail verification in this project
+# It is important to create app password for acquiring mail verification and accessing other features in this project
 
 4. Usage
 
