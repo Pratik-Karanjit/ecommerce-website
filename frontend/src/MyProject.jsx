@@ -20,6 +20,7 @@ const MyProject = () => {
   return (
     <div>
 
+{/* Routes */}
     <Routes>
         <Route path = "/" element = {<div><NavBar></NavBar><Outlet></Outlet></div>}>
                 

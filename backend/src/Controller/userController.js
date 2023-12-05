@@ -175,6 +175,43 @@ export const getAllProducts = expressAsyncHandler(async (req, res) => {
   }
 });
 
+
+
+export const feedback = expressAsyncHandler(async (req, res) => {
+  const productId = req.params.id;
+  console.log(productId)
+  const { user, message, rating } = req.body;
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return errorResponse(res, HttpStatus.NOT_FOUND, 'Product not found');
+    }
+
+    // Add feedback and rating to the product
+    product.feedback.push({ user, message });
+    product.ratings.push({ user, rating });
+
+    // Recalculate the average rating for the product
+    const totalRatings = product.ratings.reduce((sum, rating) => sum + rating.rating, 0);
+    product.averageRating = totalRatings / product.ratings.length;
+
+    // Save the updated product
+    await product.save();
+
+    return successResponse(res, HttpStatus.CREATED, 'Feedback and rating added successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
+
 export const getProductById = expressAsyncHandler(async (req, res) => {
   const { productId } = req.params;
   try {

@@ -3,6 +3,7 @@ import {
   createProduct,
   createUser,
   deleteProduct,
+  feedback,
   getAllProducts,
   getProductById,
   loginUser,
@@ -12,7 +13,6 @@ import {
   verifyEmail,
   // readUserDetails,
 } from "../Controller/userController.js";
-import isAuthenticated from "../middleware/isAuthenticated.js";
 import isAuthenticatedForEmail from "../middleware/isAuthenticatedForEmail.js";
 // import isAuthorized from "../middleware/isAuthorized.js";
 
@@ -33,6 +33,8 @@ userRouter.route('/products/:productId').get(getProductById);
 userRouter.route('/update-product-quantities').post(updateProductQuantity);
 
 userRouter.get('/products/:id', getProductById);
+
+userRouter.post('/feedback/:id', feedback)
 
 userRouter.post('/products/create', createProduct);
 
